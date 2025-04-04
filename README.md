@@ -1,7 +1,8 @@
 # EXPERIMENT--02-INTEFACING-A-DIGITAL-INPUT-TO-ARM-DEVELOPMENT-BOARD
 ## Aim: 
 To Interface a Digital Input  (userpush button  ) to ARM   development board and write a  program to obtain  the data and flash the led  
-## Components required: STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
+## Components required: 
+STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
 ## Theory 
 The full form of an ARM is an advanced reduced instruction set computer (RISC) machine, and it is a 32-bit processor architecture expanded by ARM holdings. The applications of an ARM processor include several microcontrollers as well as processors. The architecture of an ARM processor was licensed by many corporations for designing ARM processor-based SoC products and CPUs. This allows the corporations to manufacture their products using ARM architecture. Likewise, all main semiconductor companies will make ARM-based SOCs such as Samsung, Atmel, TI etc.
 
@@ -52,52 +53,44 @@ The full form of an ARM is an advanced reduced instruction set computer (RISC) m
 
 
 ## STM 32 CUBE PROGRAM :
-```
-Developed by : Sai Eswar Kandukuri
-RegNo : 212221240020
-```
+
 ```
 #include "main.h"
 #include "stdbool.h"
-bool button_status;
 void push_button();
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-int main(void){
-    HAL_Init();
-    SystemClock_Config();
-    MX_GPIO_Init();
-    while (1){
-	       pushbutton();
-    }
-}
-void pushbutton()
-{
-	button_status = HAL_GPIO_ReadPin(GPIOC , GPIO_PIN_13);
-	if(button_status == 0){
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5 , GPIO_PIN_SET);
-	HAL_Delay(1000);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5 , GPIO_PIN_RESET);
-	HAL_Delay(1000);
+bool button_status;
+
+ while (1)
+  {
+	  push_button();
+   
+  }
+  
+
+void push_button(){
+	button_status=HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0);
+	if(button_status==1)
+	{
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
+		HAL_Delay(500);
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+		HAL_Delay(500);
 	}
-	else{
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5 , GPIO_PIN_RESET);
+	else
+	{
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+		HAL_Delay(500);
 	}
 }
 ```
+
 ## Output  :
-### When NOT Clicked :
- <img width="283" alt="1" src="https://github.com/Pavan-Gv/EXPERIMENT--02-INTEFACING-A-DIGITAL-INPUT-TO-ARM-DEVELOPMENT-BOARD/assets/94827772/840a511d-ad0b-4132-a76b-cf563d4b6108">
+
+![Screenshot 2024-08-29 100523](https://github.com/user-attachments/assets/dda07eea-61a9-4cc8-94a8-80077d9110ca)
+
  
-### When Clicked :
-### Case 1: On State
-
-<img width="275" alt="2" src="https://github.com/Pavan-Gv/EXPERIMENT--02-INTEFACING-A-DIGITAL-INPUT-TO-ARM-DEVELOPMENT-BOARD/assets/94827772/93f0d7a5-2e4e-431f-9f4f-33d63827d3a8">
-
-### Case 2: Off State
-
-<img width="288" alt="3" src="https://github.com/Pavan-Gv/EXPERIMENT--02-INTEFACING-A-DIGITAL-INPUT-TO-ARM-DEVELOPMENT-BOARD/assets/94827772/d3b9a9c4-c4dd-477a-9580-ef12351cc2f9">
-
+## layout of the circuit 
+ ![Screenshot 2024-08-29 100617](https://github.com/user-attachments/assets/a324b258-81e0-4a28-ab25-45a0b48b8565)
 
  
 ## Result :
